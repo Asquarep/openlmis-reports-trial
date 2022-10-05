@@ -38,28 +38,28 @@ NC0xMzJjNjI2OWRkODc7]]>
             <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
         </box>
     </style>
-    <subDataset name="OrderDataset" uuid="e483d003-bc92-44dd-ae47-a6036ec805c8">
-        <property name="com.jaspersoft.studio.data.defaultdataadapter" value="core/local_core.xml"/>
-        <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-        <parameter name="dateFormat" class="java.lang.String" isForPrompting="false"/>
-        <parameter name="shipmentDraftId" class="java.lang.String"/>
-<!--        <queryString language="plsql">-->
-<!--            <![CDATA[SELECT-->
-<!--	o.orderCode AS orderCode,-->
-<!--	rf.name AS requestingFacilityName,-->
-<!--	sf.name AS supplyingFacilityName-->
-<!--FROM-->
-<!--	fulfillment.shipment_drafts AS d-->
-<!--	INNER JOIN fulfillment.orders AS o ON d.orderId = o.id-->
-<!--	INNER JOIN referencedata.facilities AS rf ON o.requestingFacilityId = rf.id-->
-<!--	INNER JOIN referencedata.facilities AS sf ON o.supplyingFacilityId = sf.id-->
-<!--WHERE-->
-<!--	d.id = $P{shipmentDraftId}::uuid]]>-->
-<!--        </queryString>-->
-<!--        <field name="orderCode" class="java.lang.String"/>-->
-<!--        <field name="requestingFacilityName" class="java.lang.String"/>-->
-<!--        <field name="supplyingFacilityName" class="java.lang.String"/>-->
-    </subDataset>
+<!--    <subDataset name="OrderDataset" uuid="e483d003-bc92-44dd-ae47-a6036ec805c8">-->
+<!--        <property name="com.jaspersoft.studio.data.defaultdataadapter" value="core/local_core.xml"/>-->
+<!--        <property name="com.jaspersoft.studio.data.sql.tables" value=""/>-->
+<!--        <parameter name="dateFormat" class="java.lang.String" isForPrompting="false"/>-->
+<!--        <parameter name="shipmentDraftId" class="java.lang.String"/>-->
+<!--&lt;!&ndash;        <queryString language="plsql">&ndash;&gt;-->
+<!--&lt;!&ndash;            <![CDATA[SELECT&ndash;&gt;-->
+<!--&lt;!&ndash;	o.orderCode AS orderCode,&ndash;&gt;-->
+<!--&lt;!&ndash;	rf.name AS requestingFacilityName,&ndash;&gt;-->
+<!--&lt;!&ndash;	sf.name AS supplyingFacilityName&ndash;&gt;-->
+<!--&lt;!&ndash;FROM&ndash;&gt;-->
+<!--&lt;!&ndash;	fulfillment.shipment_drafts AS d&ndash;&gt;-->
+<!--&lt;!&ndash;	INNER JOIN fulfillment.orders AS o ON d.orderId = o.id&ndash;&gt;-->
+<!--&lt;!&ndash;	INNER JOIN referencedata.facilities AS rf ON o.requestingFacilityId = rf.id&ndash;&gt;-->
+<!--&lt;!&ndash;	INNER JOIN referencedata.facilities AS sf ON o.supplyingFacilityId = sf.id&ndash;&gt;-->
+<!--&lt;!&ndash;WHERE&ndash;&gt;-->
+<!--&lt;!&ndash;	d.id = $P{shipmentDraftId}::uuid]]>&ndash;&gt;-->
+<!--&lt;!&ndash;        </queryString>&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="orderCode" class="java.lang.String"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="requestingFacilityName" class="java.lang.String"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="supplyingFacilityName" class="java.lang.String"/>&ndash;&gt;-->
+<!--    </subDataset>-->
 <!--    <parameter name="shipmentDraftId" class="java.lang.String">-->
 <!--        <property name="displayName" value="Shipment Draft ID"/>-->
 <!--    </parameter>-->
@@ -308,47 +308,47 @@ NC0xMzJjNjI2OWRkODc7]]>
     </title>
     <pageHeader>
         <band height="66">
-            <componentElement>
-                <reportElement x="0" y="0" width="480" height="60" backcolor="#FFFFFF" uuid="d367a730-0ee3-4190-bebd-9ea69213caba">
-                    <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
-                    <property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
-                    <property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
-                    <property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
-                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
-                </reportElement>
-<!--                <jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">-->
-<!--                    <datasetRun subDataset="OrderDataset" uuid="26940bc1-2e1e-424c-9a9b-e03754bb12bb">-->
-<!--                        <datasetParameter name="shipmentDraftId">-->
-<!--                            <datasetParameterExpression><![CDATA[$P{shipmentDraftId}]]></datasetParameterExpression>-->
-<!--                        </datasetParameter>-->
-<!--                        <datasetParameter name="dateFormat">-->
-<!--                            <datasetParameterExpression><![CDATA[$P{dateFormat}]]></datasetParameterExpression>-->
-<!--                        </datasetParameter>-->
-<!--                        <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>-->
-<!--                    </datasetRun>-->
-<!--                    <jr:column width="480" uuid="23073e37-411c-4b58-856e-3dfd8d3c6234">-->
-<!--                        <property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>-->
-<!--                        <jr:detailCell style="Table_TD" height="60">-->
-<!--                            <textField>-->
-<!--                                <reportElement x="0" y="0" width="480" height="15" forecolor="#000000" uuid="03004ca1-4080-437a-a66d-097b681ed43f"/>-->
-<!--                                <textFieldExpression><![CDATA["Generated on: " + DateTimeFormatter.ofPattern($P{dateFormat}).format(LocalDate.now())]]></textFieldExpression>-->
-<!--                            </textField>-->
-<!--                            <textField>-->
-<!--                                <reportElement x="0" y="15" width="480" height="15" uuid="cf02560e-c75a-4247-beb5-c6e45e390591"/>-->
-<!--                                <textFieldExpression><![CDATA["Order: " + $F{orderCode}]]></textFieldExpression>-->
-<!--                            </textField>-->
-<!--                            <textField>-->
-<!--                                <reportElement x="0" y="30" width="480" height="15" uuid="ce8e20c0-6591-44a4-80ac-ecbcffef673e"/>-->
-<!--                                <textFieldExpression><![CDATA["Facility: " + $F{requestingFacilityName}]]></textFieldExpression>-->
-<!--                            </textField>-->
-<!--                            <textField>-->
-<!--                                <reportElement positionType="FixRelativeToBottom" x="0" y="45" width="480" height="15" uuid="17b6fb59-a1ea-443c-8ca8-66944b0d4b49"/>-->
-<!--                                <textFieldExpression><![CDATA["Storeroom: " + $F{supplyingFacilityName}]]></textFieldExpression>-->
-<!--                            </textField>-->
-<!--                        </jr:detailCell>-->
-<!--                    </jr:column>-->
-<!--                </jr:table>-->
-            </componentElement>
+<!--            <componentElement>-->
+<!--                <reportElement x="0" y="0" width="480" height="60" backcolor="#FFFFFF" uuid="d367a730-0ee3-4190-bebd-9ea69213caba">-->
+<!--                    <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>-->
+<!--                    <property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>-->
+<!--                    <property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>-->
+<!--                    <property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>-->
+<!--                    <property name="com.jaspersoft.studio.unit.y" value="px"/>-->
+<!--                </reportElement>-->
+<!--&lt;!&ndash;                <jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <datasetRun subDataset="OrderDataset" uuid="26940bc1-2e1e-424c-9a9b-e03754bb12bb">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <datasetParameter name="shipmentDraftId">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <datasetParameterExpression><![CDATA[$P{shipmentDraftId}]]></datasetParameterExpression>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </datasetParameter>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <datasetParameter name="dateFormat">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <datasetParameterExpression><![CDATA[$P{dateFormat}]]></datasetParameterExpression>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </datasetParameter>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </datasetRun>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <jr:column width="480" uuid="23073e37-411c-4b58-856e-3dfd8d3c6234">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <jr:detailCell style="Table_TD" height="60">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <textField>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <reportElement x="0" y="0" width="480" height="15" forecolor="#000000" uuid="03004ca1-4080-437a-a66d-097b681ed43f"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <textFieldExpression><![CDATA["Generated on: " + DateTimeFormatter.ofPattern($P{dateFormat}).format(LocalDate.now())]]></textFieldExpression>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </textField>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <textField>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <reportElement x="0" y="15" width="480" height="15" uuid="cf02560e-c75a-4247-beb5-c6e45e390591"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <textFieldExpression><![CDATA["Order: " + $F{orderCode}]]></textFieldExpression>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </textField>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <textField>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <reportElement x="0" y="30" width="480" height="15" uuid="ce8e20c0-6591-44a4-80ac-ecbcffef673e"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <textFieldExpression><![CDATA["Facility: " + $F{requestingFacilityName}]]></textFieldExpression>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </textField>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <textField>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <reportElement positionType="FixRelativeToBottom" x="0" y="45" width="480" height="15" uuid="17b6fb59-a1ea-443c-8ca8-66944b0d4b49"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <textFieldExpression><![CDATA["Storeroom: " + $F{supplyingFacilityName}]]></textFieldExpression>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </textField>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </jr:detailCell>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </jr:column>&ndash;&gt;-->
+<!--&lt;!&ndash;                </jr:table>&ndash;&gt;-->
+<!--            </componentElement>-->
         </band>
     </pageHeader>
     <columnHeader>
