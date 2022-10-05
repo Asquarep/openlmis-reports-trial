@@ -404,42 +404,4 @@ public class JasperTemplateService {
     template.setTemplateParameters(parameters);
   }
 
-  /**
-   * Create new report parameter of report which is not defined in Jasper system.
-   */
-  private JasperTemplateParameter createParameter(JRParameter jrParameter) {
-    String[] propertyNames = jrParameter.getPropertiesMap().getPropertyNames();
-    //Check # of properties and that required ones are given.
-    if (propertyNames.length > 2) {
-      throw new ReportingException("REPORTING_EXTRA_PROPERTIES");
-    }
-    String displayName = jrParameter.getPropertiesMap().getProperty("displayName");
-    if (isBlank(displayName)) {
-      throw new ReportingException(
-              ERROR_REPORTING_PARAMETER_MISSING, "displayName");
-    }
-    //Look for sql for select and that data type is supported string.
-    String dataType = jrParameter.getValueClassName();
-    String selectSql = jrParameter.getPropertiesMap().getProperty("selectSql");
-    //Sql selects need String data type.
-    if (isNotBlank(selectSql) && !"java.lang.String".equals(dataType)) {
-      throw new ReportingException(
-              ERROR_REPORTING_PARAMETER_INCORRECT_TYPE, "sql", "string");
-    }
-    //Set parameters.
-    JasperTemplateParameter templateParameter = new JasperTemplateParameter();
-    templateParameter.setName(jrParameter.getName());
-    templateParameter.setDisplayName(displayName);
-    templateParameter.setDescription(jrParameter.getDescription());
-    templateParameter.setDataType(dataType);
-    if (isNotBlank(selectSql)) {
-      LOGGER.debug("SQL from report parameter: " + selectSql);
-      templateParameter.setSelectExpression(selectSql);
-    }
-    if (jrParameter.getDefaultValueExpression() != null) {
-      templateParameter.setDefaultValue(jrParameter.getDefaultValueExpression()
-              .getText().replace("\"", "").replace("\'", ""));
-    }
-    return templateParameter;
-  }
 }
