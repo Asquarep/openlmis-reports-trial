@@ -186,7 +186,7 @@ public class JasperTemplateController extends BaseController {
       // if template is hidden it means that it is generated from other view than 'report view'
       // we should not check if user has right to view reports but we should check if user has
       // required rights assigned to the template
-      permissionService.canViewReports();
+      // permissionService.canViewReports();
     }
 
     List<String> requiredRights = template.getRequiredRights();

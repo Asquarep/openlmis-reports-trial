@@ -392,7 +392,7 @@ public class JasperTemplateService {
       throw new ReportingException(ex, ERROR_REPORTING_FILE_INVALID, ex.getMessage());
     }
   }
-  private void setTemplateParameters(JasperTemplate template, JRParameter[] jrParameters) {
+  private void setTemplateParameters(JasperTemplate template, JRParameter[] jrParameters) throws ReportingException {
     ArrayList<JasperTemplateParameter> parameters = new ArrayList<>();
 
     for (JRParameter jrParameter : jrParameters) {
