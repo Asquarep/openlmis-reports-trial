@@ -373,7 +373,7 @@ public class JasperTemplateService {
    * @param template The template to insert parameters to
    * @param inputStream input stream of the file
    */
-  public void createTemplateParametersFromInputStream(JasperTemplate template, InputStream inputStream) {
+  public void createTemplateParametersFromInputStream(JasperTemplate template, InputStream inputStream) throws ReportingException {
     try {
       JasperReport report = JasperCompileManager.compileReport(inputStream);
       JRParameter[] jrParameters = report.getParameters();
