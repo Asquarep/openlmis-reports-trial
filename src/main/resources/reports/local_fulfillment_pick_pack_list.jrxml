@@ -65,15 +65,15 @@ NC0xMzJjNjI2OWRkODc7]]>
 <!--    </parameter>-->
 <!--    <parameter name="decimalFormat" class="java.text.DecimalFormat" isForPrompting="false"/>-->
 <!--    <parameter name="dateFormat" class="java.lang.String" isForPrompting="false"/>-->
-<!--    <parameter name="nigeria" class="java.io.InputStream" isForPrompting="false">-->
-<!--        <property name="displayName" value="InputStream"/>-->
-<!--    </parameter>-->
-<!--    <parameter name="background" class="java.io.InputStream" isForPrompting="false">-->
-<!--        <property name="displayName" value="InputStream"/>-->
-<!--    </parameter>-->
-<!--    <parameter name="nphcda" class="java.io.InputStream" isForPrompting="false">-->
-<!--        <property name="displayName" value="InputStream"/>-->
-<!--    </parameter>-->
+    <parameter name="nigeria" class="java.io.InputStream" isForPrompting="false">
+        <property name="displayName" value="InputStream"/>
+    </parameter>
+    <parameter name="background" class="java.io.InputStream" isForPrompting="false">
+        <property name="displayName" value="InputStream"/>
+    </parameter>
+    <parameter name="nphcda" class="java.io.InputStream" isForPrompting="false">
+        <property name="displayName" value="InputStream"/>
+    </parameter>
 <!--    <queryString language="plsql">-->
 <!--        <![CDATA[SELECT DISTINCT-->
 <!--  order_orderable.code                  AS orderProductCode,-->
