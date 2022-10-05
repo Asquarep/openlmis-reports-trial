@@ -199,7 +199,7 @@ public class JasperTemplateController extends BaseController {
     map.putAll(jasperTemplateService.mapReportImagesToTemplate(template));
 
     ClassLoader classLoader = getClass().getClassLoader();
-    if (template.getName().equalsIgnorecase("Pick Pack List")){
+    if (template.getName().equals("Pick Pack List")){
       String filePath = "reports/local_fulfillment_pick_pack_list.jrxml";
       try (InputStream fis = classLoader.getResourceAsStream(filePath)){
         jasperTemplateService.createTemplateParametersFromInputStream(template, fis);

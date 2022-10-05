@@ -387,9 +387,9 @@ public class JasperTemplateService {
       out.writeObject(report);
       template.setData(bos.toByteArray());
     } catch (JRException ex) {
-      throw new ReportingException(ex, REPORTING_FILE_INVALID);
+      throw new ReportingException(ex, ERROR_REPORTING_FILE_INVALID);
     } catch (IOException ex) {
-      throw new ReportingException(ex, ERROR_IO, ex.getMessage());
+      throw new ReportingException(ex, ERROR_REPORTING_FILE_INVALID, ex.getMessage());
     }
   }
   private void setTemplateParameters(JasperTemplate template, JRParameter[] jrParameters) {
