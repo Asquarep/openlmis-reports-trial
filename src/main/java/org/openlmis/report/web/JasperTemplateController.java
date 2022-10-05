@@ -18,16 +18,21 @@ package org.openlmis.report.web;
 import static org.apache.commons.lang3.BooleanUtils.isNotFalse;
 import static org.openlmis.report.i18n.JasperMessageKeys.ERROR_JASPER_TEMPLATE_NOT_FOUND;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import org.openlmis.report.domain.JasperTemplate;
+import org.openlmis.report.domain.JasperTemplateParameter;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
 import org.openlmis.report.dto.JasperTemplateDto;
 import org.openlmis.report.exception.JasperReportViewException;
 import org.openlmis.report.exception.NotFoundMessageException;
@@ -172,7 +177,7 @@ public class JasperTemplateController extends BaseController {
   @ResponseBody
   public ResponseEntity<byte[]> generateReport(
       HttpServletRequest request, @PathVariable("id") UUID templateId,
-      @PathVariable("format") String format) throws JasperReportViewException {
+      @PathVariable("format") String format) throws JasperReportViewException, IOException {
     JasperTemplate template = jasperTemplateRepository.findById(templateId)
         .orElseThrow(() -> new NotFoundMessageException(
             new Message(ERROR_JASPER_TEMPLATE_NOT_FOUND, templateId)));
@@ -193,6 +198,13 @@ public class JasperTemplateController extends BaseController {
     );
     map.putAll(jasperTemplateService.mapReportImagesToTemplate(template));
 
+    ClassLoader classLoader = getClass().getClassLoader();
+    if (template.getName().equalsIgnorecase("Pick Pack List")){
+      String filePath = "reports/local_fulfillment_pick_pack_list.jrxml";
+      try (InputStream fis = classLoader.getResourceAsStream(filePath)){
+        jasperTemplateService.createTemplateParametersFromInputStream(template, fis);
+      }
+    }
     map.put("format", format);
     map.put("dateTimeFormat", dateTimeFormat);
     map.put("dateFormat", dateFormat);
@@ -202,6 +214,9 @@ public class JasperTemplateController extends BaseController {
     DecimalFormat decimalFormat = new DecimalFormat("", decimalFormatSymbols);
     decimalFormat.setGroupingSize(Integer.parseInt(groupingSize));
     map.put("decimalFormat", decimalFormat);
+    map.put("nigeria", classLoader.getResourceAsStream("images/nigeria.png"));
+    map.put("nphcda", classLoader.getResourceAsStream("images/nphcda.png"));
+    map.put("background", classLoader.getResourceAsStream("images/Background.png"));
 
     byte[] bytes = jasperReportsViewService.getJasperReportsView(template, map);
 
@@ -223,4 +238,5 @@ public class JasperTemplateController extends BaseController {
         .header("Content-Disposition", "inline; filename=" + fileName + "." + format)
         .body(bytes);
   }
+
 }
