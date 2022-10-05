@@ -188,23 +188,25 @@ public class JasperTemplateController extends BaseController {
       // required rights assigned to the template
       // permissionService.canViewReports();
     }
+    JasperTemplate template1 = new JasperTemplate();
+    template1.setName(template.getName());
 
     List<String> requiredRights = template.getRequiredRights();
     //    permissionService.validatePermissions(
     //        requiredRights.toArray(new String[requiredRights.size()]));
 
-    Map<String, Object> map = jasperTemplateService.mapRequestParametersToTemplate(
-        request, template
-    );
-    map.putAll(jasperTemplateService.mapReportImagesToTemplate(template));
-
     ClassLoader classLoader = getClass().getClassLoader();
     if (template.getName().equals("Pick Pack List")){
       String filePath = "reports/local_fulfillment_pick_pack_list.jrxml";
       try (InputStream fis = classLoader.getResourceAsStream(filePath)){
-        jasperTemplateService.createTemplateParametersFromInputStream(template, fis);
+        jasperTemplateService.createTemplateParametersFromInputStream(template1, fis);
       }
     }
+    Map<String, Object> map = jasperTemplateService.mapRequestParametersToTemplate(
+        request, template1
+    );
+    //    map.putAll(jasperTemplateService.mapReportImagesToTemplate(template));
+
     map.put("format", format);
     map.put("dateTimeFormat", dateTimeFormat);
     map.put("dateFormat", dateFormat);
