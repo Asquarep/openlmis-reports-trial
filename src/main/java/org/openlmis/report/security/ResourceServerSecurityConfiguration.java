@@ -80,7 +80,8 @@ public class ResourceServerSecurityConfiguration implements ResourceServerConfig
             "/report/webjars/**",
             "/report/docs/**"
         ).permitAll()
-        .antMatchers("/**").fullyAuthenticated();
+        .antMatchers("/**").permitAll();
+        //.antMatchers("/**").fullyAuthenticated();
   }
 
   /**
