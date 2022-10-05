@@ -65,6 +65,15 @@ WHERE
     </parameter>
     <parameter name="decimalFormat" class="java.text.DecimalFormat" isForPrompting="false"/>
     <parameter name="dateFormat" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="nigeria" class="java.io.InputStream" isForPrompting="false">
+        <property name="displayName" value="InputStream"/>
+    </parameter>
+    <parameter name="background" class="java.io.InputStream" isForPrompting="false">
+        <property name="displayName" value="InputStream"/>
+    </parameter>
+    <parameter name="nphcda" class="java.io.InputStream" isForPrompting="false">
+        <property name="displayName" value="InputStream"/>
+    </parameter>
     <queryString language="plsql">
         <![CDATA[SELECT DISTINCT
   order_orderable.code                  AS orderProductCode,
@@ -237,16 +246,12 @@ ORDER BY
                     <textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="ProductGroup" isBlankWhenNull="false">
                         <reportElement x="550" y="0" width="127" height="30" uuid="d5c3dd3e-eab9-417d-8bc3-ea9753d06ed1"/>
                         <textElement textAlignment="Center" verticalAlignment="Middle"/>
-                        <textFieldExpression>
-                            <![CDATA[$V{sumFilledQuantityDoses} == null ? 0 : $P{decimalFormat}.format($V{sumFilledQuantityDoses}).toString()]]>
-                        </textFieldExpression>
+                        <textFieldExpression><![CDATA[$V{sumFilledQuantityDoses} == null ? 0 : $P{decimalFormat}.format($V{sumFilledQuantityDoses}).toString()]]></textFieldExpression>
                     </textField>
                     <textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="ProductGroup" isBlankWhenNull="false">
                         <reportElement x="677" y="0" width="125" height="30" uuid="7941fdc6-1a22-41ef-b4bf-ee02d5d78136"/>
                         <textElement textAlignment="Center" verticalAlignment="Middle"/>
-                        <textFieldExpression>
-                            <![CDATA[$V{sumFilledQuantity} == null ? 0 : $P{decimalFormat}.format($V{sumFilledQuantity}).toString()]]>
-                        </textFieldExpression>
+                        <textFieldExpression><![CDATA[$V{sumFilledQuantity} == null ? 0 : $P{decimalFormat}.format($V{sumFilledQuantity}).toString()]]></textFieldExpression>
                     </textField>
                     <textField isStretchWithOverflow="true" isBlankWhenNull="true">
                         <reportElement x="130" y="0" width="150" height="30" uuid="45d213d8-f881-40c5-b90f-d29e1e9d1f55"/>
@@ -263,24 +268,53 @@ ORDER BY
         </groupHeader>
     </group>
     <background>
-        <band splitType="Stretch"/>
+        <band height="300" splitType="Stretch">
+            <image>
+                <reportElement x="140" y="30" width="280" height="260" uuid="ee07bebe-35aa-4bfa-bafd-d43009f44dd1"/>
+                <imageExpression><![CDATA[$P{background}]]></imageExpression>
+            </image>
+        </band>
     </background>
     <title>
-        <band height="90" splitType="Stretch">
+        <band height="64" splitType="Stretch">
             <property name="com.jaspersoft.studio.unit.height" value="px"/>
+            <image onErrorType="Blank">
+                <reportElement x="0" y="0" width="55" height="55" uuid="652148fb-5d09-4b36-81d8-11beb8e62be8"/>
+                <imageExpression><![CDATA[$P{nphcda}]]></imageExpression>
+            </image>
+            <image onErrorType="Blank">
+                <reportElement x="750" y="0" width="55" height="55" uuid="1a26fbda-bcb5-46c7-a212-109a0e134a3b"/>
+                <imageExpression><![CDATA[$P{nigeria}]]></imageExpression>
+            </image>
             <staticText>
-                <reportElement positionType="FixRelativeToBottom" x="0" y="0" width="200" height="30" uuid="bc3874ea-c0b6-4870-bb5d-b63fd3314fee"/>
-                <textElement>
-                    <font size="24"/>
+                <reportElement x="55" y="5" width="690" height="22" uuid="1f4f6580-e7d0-48fb-946e-b2e2b840fc1a">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font size="18" isBold="true"/>
                 </textElement>
-                <text><![CDATA[Pick Pack List]]></text>
+                <text><![CDATA[NATIONAL PRIMARY HEALTH CARE DEVELOPMENT AGENCY]]></text>
             </staticText>
+            <staticText>
+                <reportElement x="55" y="30" width="690" height="15" uuid="1f4f6580-e7d0-48fb-946e-b2e2b840fc1a">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <text><![CDATA[VACCINES/DILUENTS/INJECTION EQUIPMENT PICK PACK LIST]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="66">
             <componentElement>
-                <reportElement x="0" y="30" width="480" height="60" uuid="d367a730-0ee3-4190-bebd-9ea69213caba">
+                <reportElement x="0" y="0" width="480" height="60" backcolor="#FFFFFF" uuid="d367a730-0ee3-4190-bebd-9ea69213caba">
                     <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
                     <property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
                     <property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
                     <property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
                 </reportElement>
                 <jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
                     <datasetRun subDataset="OrderDataset" uuid="26940bc1-2e1e-424c-9a9b-e03754bb12bb">
@@ -296,8 +330,8 @@ ORDER BY
                         <property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
                         <jr:detailCell style="Table_TD" height="60">
                             <textField>
-                                <reportElement x="0" y="0" width="480" height="15" uuid="03004ca1-4080-437a-a66d-097b681ed43f"/>
-                                    <textFieldExpression><![CDATA["Generated on: " + DateTimeFormatter.ofPattern($P{dateFormat}).format(LocalDate.now())]]></textFieldExpression>
+                                <reportElement x="0" y="0" width="480" height="15" forecolor="#000000" uuid="03004ca1-4080-437a-a66d-097b681ed43f"/>
+                                <textFieldExpression><![CDATA["Generated on: " + DateTimeFormatter.ofPattern($P{dateFormat}).format(LocalDate.now())]]></textFieldExpression>
                             </textField>
                             <textField>
                                 <reportElement x="0" y="15" width="480" height="15" uuid="cf02560e-c75a-4247-beb5-c6e45e390591"/>
@@ -316,7 +350,7 @@ ORDER BY
                 </jr:table>
             </componentElement>
         </band>
-    </title>
+    </pageHeader>
     <columnHeader>
         <band height="30">
             <property name="com.jaspersoft.studio.unit.height" value="px"/>
