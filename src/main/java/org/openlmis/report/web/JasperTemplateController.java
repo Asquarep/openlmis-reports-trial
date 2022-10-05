@@ -190,8 +190,8 @@ public class JasperTemplateController extends BaseController {
     }
 
     List<String> requiredRights = template.getRequiredRights();
-    permissionService.validatePermissions(
-        requiredRights.toArray(new String[requiredRights.size()]));
+    //    permissionService.validatePermissions(
+    //        requiredRights.toArray(new String[requiredRights.size()]));
 
     Map<String, Object> map = jasperTemplateService.mapRequestParametersToTemplate(
         request, template
