@@ -18,7 +18,8 @@ package org.openlmis.report.service;
 import static org.openlmis.report.i18n.JasperMessageKeys.ERROR_JASPER_REPORT_FORMAT_UNKNOWN;
 import static org.openlmis.report.i18n.JasperMessageKeys.ERROR_JASPER_REPORT_GENERATION;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
 import java.sql.Connection;
 import java.util.Map;
 import javax.sql.DataSource;
@@ -49,7 +50,6 @@ public class JasperReportsViewService {
    */
   public byte[] getJasperReportsView(JasperTemplate jasperTemplate,
       Map<String, Object> params) throws JasperReportViewException {
-    System.out.println(jasperTemplate.toString());
 
     try {
       try (Connection connection = replicationDataSource.getConnection()) {
@@ -58,8 +58,6 @@ public class JasperReportsViewService {
 
         JasperPrint jasperPrint = JasperFillManager
             .fillReport((JasperReport) inputStream.readObject(), params, connection);
-        System.out.println("After print");
-
         return prepareReport(jasperPrint, params);
       }
     } catch (IllegalArgumentException iae) {

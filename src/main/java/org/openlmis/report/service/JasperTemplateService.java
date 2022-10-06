@@ -279,9 +279,8 @@ public class JasperTemplateService {
     String displayName = jrParameter.getPropertiesMap().getProperty("displayName");
 
     if (isBlank(displayName)) {
-    //      throw new ReportingException(
-    //          ERROR_REPORTING_PARAMETER_MISSING, "displayName");
-      System.out.println("props missing");
+      throw new ReportingException(
+              ERROR_REPORTING_PARAMETER_MISSING, "displayName");
     }
 
     String dataType = jrParameter.getValueClassName();
@@ -365,6 +364,7 @@ public class JasperTemplateService {
       }
     }
   }
+
   /**
    * Create additional report parameters.
    * Save additional report parameters as TemplateParameter list.
@@ -374,14 +374,11 @@ public class JasperTemplateService {
    * @param template The template to insert parameters to
    * @param inputStream input stream of the file
    */
-  public void createTemplateParametersFromInputStream(JasperTemplate template, InputStream inputStream) throws ReportingException {
+  public void createTemplateParametersFromInputStream(
+          JasperTemplate template, InputStream inputStream)
+          throws ReportingException {
     try {
       JasperReport report = JasperCompileManager.compileReport(inputStream);
-      JRParameter[] jrParameters = report.getParameters();
-
-      if (jrParameters != null && jrParameters.length > 0) {
-        setTemplateParameters(template, jrParameters);
-      }
 
       ByteArrayOutputStream bos = new ByteArrayOutputStream();
       ObjectOutputStream out = new ObjectOutputStream(bos);
@@ -392,17 +389,6 @@ public class JasperTemplateService {
     } catch (IOException ex) {
       throw new ReportingException(ex, ERROR_REPORTING_FILE_INVALID, ex.getMessage());
     }
-  }
-  private void setTemplateParameters(JasperTemplate template, JRParameter[] jrParameters) throws ReportingException {
-    ArrayList<JasperTemplateParameter> parameters = new ArrayList<>();
-
-    for (JRParameter jrParameter : jrParameters) {
-      if (!jrParameter.isSystemDefined()) {
-        parameters.add(createParameter(jrParameter));
-      }
-    }
-
-    template.setTemplateParameters(parameters);
   }
 
 }

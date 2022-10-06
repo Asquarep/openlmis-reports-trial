@@ -18,21 +18,18 @@ package org.openlmis.report.web;
 import static org.apache.commons.lang3.BooleanUtils.isNotFalse;
 import static org.openlmis.report.i18n.JasperMessageKeys.ERROR_JASPER_TEMPLATE_NOT_FOUND;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import org.openlmis.report.domain.JasperTemplate;
-import org.openlmis.report.domain.JasperTemplateParameter;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRParameter;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperReport;
 import org.openlmis.report.dto.JasperTemplateDto;
 import org.openlmis.report.exception.JasperReportViewException;
 import org.openlmis.report.exception.NotFoundMessageException;
@@ -177,7 +174,8 @@ public class JasperTemplateController extends BaseController {
   @ResponseBody
   public ResponseEntity<byte[]> generateReport(
       HttpServletRequest request, @PathVariable("id") UUID templateId,
-      @PathVariable("format") String format) throws JasperReportViewException, IOException, ReportingException {
+      @PathVariable("format") String format)
+          throws JasperReportViewException, IOException, ReportingException {
     JasperTemplate template = jasperTemplateRepository.findById(templateId)
         .orElseThrow(() -> new NotFoundMessageException(
             new Message(ERROR_JASPER_TEMPLATE_NOT_FOUND, templateId)));
@@ -186,31 +184,34 @@ public class JasperTemplateController extends BaseController {
       // if template is hidden it means that it is generated from other view than 'report view'
       // we should not check if user has right to view reports but we should check if user has
       // required rights assigned to the template
-      // permissionService.canViewReports();
+      permissionService.canViewReports();
     }
     JasperTemplate template1 = new JasperTemplate();
     template1.setName(template.getName());
 
     List<String> requiredRights = template.getRequiredRights();
-    //    permissionService.validatePermissions(
-    //        requiredRights.toArray(new String[requiredRights.size()]));
+    permissionService.validatePermissions(
+            requiredRights.toArray(new String[requiredRights.size()]));
     Map<String, Object> map;
 
     ClassLoader classLoader = getClass().getClassLoader();
-    if (template1.getName().equals("Pick Pack List")){
+    if (template1.getName().equals("Pick Pack List")) {
       String filePath = "reports/local_fulfillment_pick_pack_list.jrxml";
-      try (InputStream fis = classLoader.getResourceAsStream(filePath)){
+      try (InputStream fis = classLoader.getResourceAsStream(filePath)) {
+        System.out.println("OpenLmisTemplate " + template.getTemplateParameters());
         jasperTemplateService.createTemplateParametersFromInputStream(template1, fis);
+        template1.setTemplateParameters(template.getTemplateParameters());
+        System.out.println("OpenLmisTemplate " + template1.getTemplateParameters());
       }
       map = jasperTemplateService.mapRequestParametersToTemplate(
               request, template1
       );
-    }else {
+    } else {
       map = jasperTemplateService.mapRequestParametersToTemplate(
           request, template
       );
     }
-    //    map.putAll(jasperTemplateService.mapReportImagesToTemplate(template));
+    map.putAll(jasperTemplateService.mapReportImagesToTemplate(template));
 
     map.put("format", format);
     map.put("dateTimeFormat", dateTimeFormat);
@@ -225,7 +226,7 @@ public class JasperTemplateController extends BaseController {
     map.put("nphcda", classLoader.getResourceAsStream("images/nphcda.png"));
     map.put("background", classLoader.getResourceAsStream("images/Background.png"));
 
-    byte[] bytes = jasperReportsViewService.getJasperReportsView(template, map);
+    byte[] bytes = jasperReportsViewService.getJasperReportsView(template1, map);
 
     MediaType mediaType;
     if ("csv".equals(format)) {

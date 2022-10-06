@@ -268,9 +268,17 @@ ORDER BY
         </groupHeader>
     </group>
     <background>
-        <band height="300" splitType="Stretch">
-            <image>
-                <reportElement x="140" y="30" width="280" height="260" uuid="ee07bebe-35aa-4bfa-bafd-d43009f44dd1"/>
+        <band height="555" splitType="Stretch">
+            <property name="com.jaspersoft.studio.unit.height" value="px"/>
+            <property name="com.jaspersoft.studio.layout"/>
+            <image onErrorType="Blank">
+                <reportElement positionType="FixRelativeToBottom" stretchType="ContainerHeight" x="220" y="190" width="360" height="360" uuid="fda2319e-89be-4575-b043-b074600cadfe">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <box>
+                    <pen lineWidth="0.0" lineColor="#FF0C08"/>
+                </box>
                 <imageExpression><![CDATA[$P{background}]]></imageExpression>
             </image>
         </band>
