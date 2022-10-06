@@ -51,6 +51,10 @@ public class JasperReportsViewService {
       Map<String, Object> params) throws JasperReportViewException {
     System.out.println("before try");
 
+    jasperTemplate.getTemplateParameters().forEach(param -> System.out.println(param.getName()));
+
+    System.out.println(params);
+
     try {
       try (Connection connection = replicationDataSource.getConnection()) {
         System.out.println("inside try");
