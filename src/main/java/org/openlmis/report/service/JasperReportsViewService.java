@@ -49,6 +49,7 @@ public class JasperReportsViewService {
    */
   public byte[] getJasperReportsView(JasperTemplate jasperTemplate,
       Map<String, Object> params) throws JasperReportViewException {
+    System.out.println(jasperTemplate.toString());
 
     try {
       try (Connection connection = replicationDataSource.getConnection()) {
@@ -57,6 +58,7 @@ public class JasperReportsViewService {
 
         JasperPrint jasperPrint = JasperFillManager
             .fillReport((JasperReport) inputStream.readObject(), params, connection);
+        System.out.println("After print");
 
         return prepareReport(jasperPrint, params);
       }
