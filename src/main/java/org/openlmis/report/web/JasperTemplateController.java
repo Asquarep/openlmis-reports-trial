@@ -192,8 +192,8 @@ public class JasperTemplateController extends BaseController {
     template1.setName(template.getName());
 
     List<String> requiredRights = template.getRequiredRights();
-    //    permissionService.validatePermissions(
-    //        requiredRights.toArray(new String[requiredRights.size()]));
+        permissionService.validatePermissions(
+            requiredRights.toArray(new String[requiredRights.size()]));
     Map<String, Object> map;
 
     ClassLoader classLoader = getClass().getClassLoader();
@@ -211,7 +211,7 @@ public class JasperTemplateController extends BaseController {
           request, template
       );
     }
-    //    map.putAll(jasperTemplateService.mapReportImagesToTemplate(template));
+    map.putAll(jasperTemplateService.mapReportImagesToTemplate(template));
 
     map.put("format", format);
     map.put("dateTimeFormat", dateTimeFormat);
