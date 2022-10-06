@@ -200,6 +200,7 @@ public class JasperTemplateController extends BaseController {
     if (template1.getName().equals("Pick Pack List")){
       String filePath = "reports/local_fulfillment_pick_pack_list.jrxml";
       try (InputStream fis = classLoader.getResourceAsStream(filePath)){
+        System.out.println("FOUND PICK PACK LIST");
         jasperTemplateService.createTemplateParametersFromInputStream(template1, fis);
       }
       map = jasperTemplateService.mapRequestParametersToTemplate(
