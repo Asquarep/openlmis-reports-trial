@@ -404,6 +404,7 @@ public class JasperTemplateService {
         System.out.println("set param " + jrParameter.getName());
       }
     }
+    parameters.forEach(param -> System.out.println(param.getName()));
 
     template.setTemplateParameters(parameters);
   }
