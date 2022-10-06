@@ -18,7 +18,8 @@ package org.openlmis.report.service;
 import static org.openlmis.report.i18n.JasperMessageKeys.ERROR_JASPER_REPORT_FORMAT_UNKNOWN;
 import static org.openlmis.report.i18n.JasperMessageKeys.ERROR_JASPER_REPORT_GENERATION;
 
-import java.io.*;
+import java.io.ObjectInputStream;
+import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.util.Map;
 import javax.sql.DataSource;

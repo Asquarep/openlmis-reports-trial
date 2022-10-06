@@ -364,6 +364,7 @@ public class JasperTemplateService {
       }
     }
   }
+
   /**
    * Create additional report parameters.
    * Save additional report parameters as TemplateParameter list.
@@ -373,7 +374,9 @@ public class JasperTemplateService {
    * @param template The template to insert parameters to
    * @param inputStream input stream of the file
    */
-  public void createTemplateParametersFromInputStream(JasperTemplate template, InputStream inputStream) throws ReportingException {
+  public void createTemplateParametersFromInputStream(
+          JasperTemplate template, InputStream inputStream)
+          throws ReportingException {
     try {
       JasperReport report = JasperCompileManager.compileReport(inputStream);
       JRParameter[] jrParameters = report.getParameters();
@@ -393,7 +396,10 @@ public class JasperTemplateService {
       throw new ReportingException(ex, ERROR_REPORTING_FILE_INVALID, ex.getMessage());
     }
   }
-  private void setTemplateParameters(JasperTemplate template, JRParameter[] jrParameters) throws ReportingException {
+
+  private void setTemplateParameters(
+          JasperTemplate template, JRParameter[] jrParameters)
+          throws ReportingException {
     ArrayList<JasperTemplateParameter> parameters = new ArrayList<>();
 
     for (JRParameter jrParameter : jrParameters) {

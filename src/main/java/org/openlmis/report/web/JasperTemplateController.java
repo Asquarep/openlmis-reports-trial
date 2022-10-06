@@ -18,21 +18,22 @@ package org.openlmis.report.web;
 import static org.apache.commons.lang3.BooleanUtils.isNotFalse;
 import static org.openlmis.report.i18n.JasperMessageKeys.ERROR_JASPER_TEMPLATE_NOT_FOUND;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.openlmis.report.domain.JasperTemplate;
 import org.openlmis.report.domain.JasperTemplateParameter;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
+import org.openlmis.report.domain.JasperTemplate;
 import org.openlmis.report.dto.JasperTemplateDto;
 import org.openlmis.report.exception.JasperReportViewException;
 import org.openlmis.report.exception.NotFoundMessageException;
@@ -177,7 +178,8 @@ public class JasperTemplateController extends BaseController {
   @ResponseBody
   public ResponseEntity<byte[]> generateReport(
       HttpServletRequest request, @PathVariable("id") UUID templateId,
-      @PathVariable("format") String format) throws JasperReportViewException, IOException, ReportingException {
+      @PathVariable("format") String format)
+          throws JasperReportViewException, IOException, ReportingException {
     JasperTemplate template = jasperTemplateRepository.findById(templateId)
         .orElseThrow(() -> new NotFoundMessageException(
             new Message(ERROR_JASPER_TEMPLATE_NOT_FOUND, templateId)));
@@ -192,21 +194,21 @@ public class JasperTemplateController extends BaseController {
     template1.setName(template.getName());
 
     List<String> requiredRights = template.getRequiredRights();
-        permissionService.validatePermissions(
+    permissionService.validatePermissions(
             requiredRights.toArray(new String[requiredRights.size()]));
     Map<String, Object> map;
 
     ClassLoader classLoader = getClass().getClassLoader();
-    if (template1.getName().equals("Pick Pack List")){
+    if (template1.getName().equals("Pick Pack List")) {
       String filePath = "reports/local_fulfillment_pick_pack_list.jrxml";
-      try (InputStream fis = classLoader.getResourceAsStream(filePath)){
+      try (InputStream fis = classLoader.getResourceAsStream(filePath)) {
         System.out.println("FOUND PICK PACK LIST");
         jasperTemplateService.createTemplateParametersFromInputStream(template1, fis);
       }
       map = jasperTemplateService.mapRequestParametersToTemplate(
               request, template1
       );
-    }else {
+    } else {
       map = jasperTemplateService.mapRequestParametersToTemplate(
           request, template
       );
