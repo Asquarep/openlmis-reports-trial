@@ -282,6 +282,7 @@ public class JasperTemplateService {
     //      throw new ReportingException(
     //          ERROR_REPORTING_PARAMETER_MISSING, "displayName");
       System.out.println("props missing");
+      System.out.println(jrParameter);
     }
 
     String dataType = jrParameter.getValueClassName();
