@@ -81,7 +81,6 @@ public class ResourceServerSecurityConfiguration implements ResourceServerConfig
             "/report/docs/**"
         ).permitAll()
         .antMatchers("/**").fullyAuthenticated();
-        .antMatchers("/**").fullyAuthenticated();
   }
 
   /**
