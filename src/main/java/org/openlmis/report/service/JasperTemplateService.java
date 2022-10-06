@@ -388,6 +388,7 @@ public class JasperTemplateService {
       ObjectOutputStream out = new ObjectOutputStream(bos);
       out.writeObject(report);
       template.setData(bos.toByteArray());
+      System.out.println("Created parameters");
     } catch (JRException ex) {
       throw new ReportingException(ex, ERROR_REPORTING_FILE_INVALID);
     } catch (IOException ex) {
@@ -400,6 +401,7 @@ public class JasperTemplateService {
     for (JRParameter jrParameter : jrParameters) {
       if (!jrParameter.isSystemDefined()) {
         parameters.add(createParameter(jrParameter));
+        System.out.println("set param " + jrParameter.getName());
       }
     }
 

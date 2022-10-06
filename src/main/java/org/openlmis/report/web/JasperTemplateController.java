@@ -225,7 +225,6 @@ public class JasperTemplateController extends BaseController {
     map.put("nigeria", classLoader.getResourceAsStream("images/nigeria.png"));
     map.put("nphcda", classLoader.getResourceAsStream("images/nphcda.png"));
     map.put("background", classLoader.getResourceAsStream("images/Background.png"));
-    System.out.println(Arrays.toString(template1.getData()));
 
     byte[] bytes = jasperReportsViewService.getJasperReportsView(template1, map);
 
