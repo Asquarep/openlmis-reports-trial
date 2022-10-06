@@ -27,6 +27,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import org.openlmis.report.domain.JasperTemplateParameter;
 import net.sf.jasperreports.engine.JRException;
