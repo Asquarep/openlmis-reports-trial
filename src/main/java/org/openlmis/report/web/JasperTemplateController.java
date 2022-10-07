@@ -200,7 +200,6 @@ public class JasperTemplateController extends BaseController {
       try (InputStream fis = classLoader.getResourceAsStream(filePath)) {
         jasperTemplateService.createTemplateParametersFromInputStream(template1, fis);
         template1.setTemplateParameters(template.getTemplateParameters());
-        System.out.println("OpenLmisTemplate " + template1.getTemplateParameters());
       }
       map = jasperTemplateService.mapRequestParametersToTemplate(
               request, template1
