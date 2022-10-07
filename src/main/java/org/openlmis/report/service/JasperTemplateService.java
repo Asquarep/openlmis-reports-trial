@@ -380,11 +380,11 @@ public class JasperTemplateService {
           throws ReportingException {
     try {
       JasperReport report = JasperCompileManager.compileReport(inputStream);
-      JRParameter[] jrParameters = report.getParameters();
+      // JRParameter[] jrParameters = report.getParameters();
 
-      if (jrParameters != null && jrParameters.length > 0) {
-        setTemplateParameters(template, jrParameters);
-      }
+      //if (jrParameters != null && jrParameters.length > 0) {
+      //  setTemplateParameters(template, jrParameters);
+      //}
 
       ByteArrayOutputStream bos = new ByteArrayOutputStream();
       ObjectOutputStream out = new ObjectOutputStream(bos);
@@ -398,19 +398,19 @@ public class JasperTemplateService {
     }
   }
 
-  private void setTemplateParameters(
-          JasperTemplate template, JRParameter[] jrParameters)
-          throws ReportingException {
-    ArrayList<JasperTemplateParameter> parameters = new ArrayList<>();
-
-    for (JRParameter jrParameter : jrParameters) {
-      if (!jrParameter.isSystemDefined()) {
-        parameters.add(createParameter(jrParameter));
-        System.out.println("set param " + jrParameter.getName());
-      }
-    }
-
-    template.setTemplateParameters(parameters);
-  }
+  //  private void setTemplateParameters(
+  //          JasperTemplate template, JRParameter[] jrParameters)
+  //          throws ReportingException {
+  //    ArrayList<JasperTemplateParameter> parameters = new ArrayList<>();
+  //
+  //    for (JRParameter jrParameter : jrParameters) {
+  //      if (!jrParameter.isSystemDefined()) {
+  //        parameters.add(createParameter(jrParameter));
+  //        System.out.println("set param " + jrParameter.getName());
+  //      }
+  //    }
+  //
+  //    template.setTemplateParameters(parameters);
+  //  }
 
 }
