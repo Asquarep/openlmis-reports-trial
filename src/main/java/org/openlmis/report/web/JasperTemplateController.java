@@ -198,7 +198,6 @@ public class JasperTemplateController extends BaseController {
     if (template1.getName().equals("Pick Pack List")) {
       String filePath = "reports/local_fulfillment_pick_pack_list.jrxml";
       try (InputStream fis = classLoader.getResourceAsStream(filePath)) {
-        System.out.println("OpenLmisTemplate " + template.getTemplateParameters());
         jasperTemplateService.createTemplateParametersFromInputStream(template1, fis);
         template1.setTemplateParameters(template.getTemplateParameters());
         System.out.println("OpenLmisTemplate " + template1.getTemplateParameters());
