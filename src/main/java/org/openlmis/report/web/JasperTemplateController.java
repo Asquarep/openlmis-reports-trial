@@ -201,8 +201,8 @@ public class JasperTemplateController extends BaseController {
         System.out.println("FOUND PICK PACK LIST");
         System.out.println("OpenLmisTemplate " + template.getTemplateParameters());
         jasperTemplateService.createTemplateParametersFromInputStream(template1, fis);
-        System.out.println("OpenLmisTemplate " + template1.getTemplateParameters());
         template1.setTemplateParameters(template.getTemplateParameters());
+        System.out.println("OpenLmisTemplate " + template1.getTemplateParameters());
       }
       map = jasperTemplateService.mapRequestParametersToTemplate(
               request, template1
