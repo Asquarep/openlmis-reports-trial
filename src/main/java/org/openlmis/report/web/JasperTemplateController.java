@@ -188,6 +188,7 @@ public class JasperTemplateController extends BaseController {
     }
     JasperTemplate template1 = new JasperTemplate();
     template1.setName(template.getName());
+    template1.setTemplateParameters(template.getTemplateParameters);
 
     List<String> requiredRights = template.getRequiredRights();
     //permissionService.validatePermissions(
