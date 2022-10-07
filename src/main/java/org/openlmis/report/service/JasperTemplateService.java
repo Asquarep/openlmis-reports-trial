@@ -279,6 +279,7 @@ public class JasperTemplateService {
     String displayName = jrParameter.getPropertiesMap().getProperty("displayName");
 
     if (isBlank(displayName)) {
+      System.out.println(jrParameter.getName());
       throw new ReportingException(
               ERROR_REPORTING_PARAMETER_MISSING, "displayName");
     }
