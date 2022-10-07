@@ -50,21 +50,14 @@ public class JasperReportsViewService {
    */
   public byte[] getJasperReportsView(JasperTemplate jasperTemplate,
       Map<String, Object> params) throws JasperReportViewException {
-    System.out.println("before try");
-
-    System.out.println(params);
 
     try {
       try (Connection connection = replicationDataSource.getConnection()) {
-        System.out.println("inside try");
         ObjectInputStream inputStream = new ObjectInputStream(
             new ByteArrayInputStream(jasperTemplate.getData()));
 
-        System.out.println("before print");
         JasperPrint jasperPrint = JasperFillManager
             .fillReport((JasperReport) inputStream.readObject(), params, connection);
-        System.out.println("After print");
-
         return prepareReport(jasperPrint, params);
       }
     } catch (IllegalArgumentException iae) {

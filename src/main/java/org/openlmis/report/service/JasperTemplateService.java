@@ -279,7 +279,6 @@ public class JasperTemplateService {
     String displayName = jrParameter.getPropertiesMap().getProperty("displayName");
 
     if (isBlank(displayName)) {
-      System.out.println(jrParameter.getName());
       throw new ReportingException(
               ERROR_REPORTING_PARAMETER_MISSING, "displayName");
     }
@@ -380,37 +379,16 @@ public class JasperTemplateService {
           throws ReportingException {
     try {
       JasperReport report = JasperCompileManager.compileReport(inputStream);
-      // JRParameter[] jrParameters = report.getParameters();
-
-      //if (jrParameters != null && jrParameters.length > 0) {
-      //  setTemplateParameters(template, jrParameters);
-      //}
 
       ByteArrayOutputStream bos = new ByteArrayOutputStream();
       ObjectOutputStream out = new ObjectOutputStream(bos);
       out.writeObject(report);
       template.setData(bos.toByteArray());
-      System.out.println("Created parameters");
     } catch (JRException ex) {
       throw new ReportingException(ex, ERROR_REPORTING_FILE_INVALID);
     } catch (IOException ex) {
       throw new ReportingException(ex, ERROR_REPORTING_FILE_INVALID, ex.getMessage());
     }
   }
-
-  //  private void setTemplateParameters(
-  //          JasperTemplate template, JRParameter[] jrParameters)
-  //          throws ReportingException {
-  //    ArrayList<JasperTemplateParameter> parameters = new ArrayList<>();
-  //
-  //    for (JRParameter jrParameter : jrParameters) {
-  //      if (!jrParameter.isSystemDefined()) {
-  //        parameters.add(createParameter(jrParameter));
-  //        System.out.println("set param " + jrParameter.getName());
-  //      }
-  //    }
-  //
-  //    template.setTemplateParameters(parameters);
-  //  }
 
 }
